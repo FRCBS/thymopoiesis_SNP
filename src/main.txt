@@ -1,0 +1,80 @@
+#-----------------------------------------------------------------------------------------------
+
+# thymus SNP rs2204985 in HSCT
+
+#-----------------------------------------------------------------------------------------------
+
+# find SNP name in our data
+./src/thymic_SNP/look_for_thymic_SNP.R
+
+
+# extract from imputed plink1.9 files 
+./src/thymic_SNP/extract_thymic_snp_plink1.sh
+
+#-----------------------------------------------------------------------------------------------
+
+# pheno
+./src/thymic_SNP/pheno.R
+
+# ID lists
+./src/thymic_SNP/ID_lists.R
+
+# covariates 
+./src/thymic_SNP/covars.R
+
+#-----------------------------------------------------------------------------------------------
+
+# association analysis
+
+# with plink1.9 files
+
+# force alleles
+./src/thymic_SNP/force_allele_plink1.sh
+
+# association
+./src/thymic_SNP/association_genotypic_plink1.sh
+
+# (katalonia: no unrelated donors, hence no results from those)
+
+# one error for katalonia in the 9/10 donor category: see what is going on there
+# the number of donors (5) is too little compared to the number of predictors -> that's why an error
+
+# in the test below no covars are added & then it works because fewer predictors included
+./src/thymic_SNP/association_genotypic_plink1_katalonia_tests.sh 
+
+# make a table of the results
+./src/thymic_SNP/results_genotypic.R
+# make plot sof the results
+./src/thymic_SNP/association_plots.R
+
+#-----------------------------------------------------------------------------------------------
+
+# survival analysis
+
+# data already in survival format
+
+# add thymus SNP dosage
+./src/thymic_SNP/dosage.sh
+./src/thymic_SNP/thymus_survival_data.R
+
+# survival analysis
+./src/thymic_SNP/survival.R # all subsets & univariate and multivariate analysis
+
+#-----------------------------------------------------------------------------------------------
+
+# meta-analysis
+
+./src/thymic_SNP/meta_analysis.R
+
+#-----------------------------------------------------------------------------------------------
+
+# for the manuscipt
+
+# get sample numbers for the manuscript
+./src/thymic_SNP/sample_numbers.R
+
+# get sample numbers for the manuscript
+./src/thymic_SNP/table1.R
+
+
+
